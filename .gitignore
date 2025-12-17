@@ -43,3 +43,8 @@ frontend/.next/
 ### Env ###
 .env
 
+# 루트 node_modules
+node_modules/
+
+# frontend node_modules
+frontend/node_modules/

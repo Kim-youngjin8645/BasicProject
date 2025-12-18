@@ -26,7 +26,7 @@ jobs:
 
       # Gradle Wrapper 실행 권한 부여
       - name: Grant execute permission for Gradle Wrapper
-        run: chmod +x ./src/gradlew
+        run: chmod +x ./gradlew
 
       - name: Build Backend JAR
         run: ./gradlew build -p src
@@ -37,7 +37,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ec2-user
           key: ${{ secrets.EC2_KEY }}
-          source: "src/build/libs/BasicProject-0.0.1-SNAPSHOT.jar"
+          source: "build/libs/BasicProject-0.0.1-SNAPSHOT.jar"
           target: "/home/ec2-user/app/backend/BasicProject-0.0.1-SNAPSHOT.jar"
 
       - name: Deploy to EC2 #배포

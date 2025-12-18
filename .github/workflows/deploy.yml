@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install frontend dependencies #EC2서버 배포준비
+      - name: Install frontend dependencies #EC2서버 배포준비(로컬에서 빌드)
         run: |
           cd frontend
           npm install
@@ -31,14 +31,15 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             # Backend 배포
-            cd /home/ec2-user/app/src
+            cd /home/ec2-user/app/backend
             pkill -f 'BasicProject-0.0.1-SNAPSHOT.jar' || true
-            mv ~/BasicProject/build/libs/*.jar .
+            # 로컬에서 git clone된 jar 복사
+            cp ~/BasicProject/build/libs/BasicProject-0.0.1-SNAPSHOT.jar . 
             nohup java -jar BasicProject-0.0.1-SNAPSHOT.jar > backend.log 2>&1 &
 
             # Frontend 배포
             cd /home/ec2-user/app/frontend
             pkill -f 'npm' || true
-            cp -r ~/frontend/* .
+            cp -r ~/frontend/* . 
             npm install
             nohup npm run start > frontend.log 2>&1 &

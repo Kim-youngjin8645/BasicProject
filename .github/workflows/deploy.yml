@@ -51,14 +51,11 @@ jobs:
             set -e #중간 에러로 스크립트 종료 방지
             # Backend 배포
             cd /home/ec2-user/app/backend
-            pkill -f "java -jar BasicProject-0.0.1-SNAPSHOT.jar" || true
-            sleep 2
+            pkill -f "BasicProject-0.0.1-SNAPSHOT.jar" || true
+            
             # 백엔드 실행 (SSH와 완전 분리)
-            nohup java -jar BasicProject-0.0.1-SNAPSHOT.jar \
+            exec nohup java -jar BasicProject-0.0.1-SNAPSHOT.jar \
               > backend.log 2>&1 < /dev/null &
-
-            echo "Backend deployed successfully"
-            exit 0
 
             # Frontend 배포
             # cd /home/ec2-user/app/frontend

@@ -50,9 +50,8 @@ jobs:
             # Backend 배포
             cd /home/ec2-user/app/backend
             pkill -f 'BasicProject-0.0.1-SNAPSHOT.jar' || true
-            # 로컬에서 git clone된 jar 복사
-            cp ~/BasicProject/build/libs/BasicProject-0.0.1-SNAPSHOT.jar . 
-            nohup java -jar BasicProject-0.0.1-SNAPSHOT.jar > backend.log 2>&1 &
+            # java프로세스만 죽이기.
+            nohup java -jar BasicProject-0.0.1-SNAPSHOT.jar > backend.log 2>&1 < /dev/null &
 
             # Frontend 배포
             # cd /home/ec2-user/app/frontend

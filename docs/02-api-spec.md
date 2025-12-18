@@ -4,7 +4,9 @@
 
 * **URL:** `/guestbooks`
 * **Method:** `GET`
+* * **Response Code:** 200 
 * **Response:** JSON 배열
+
 
 ```json
 [

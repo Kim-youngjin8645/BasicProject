@@ -8,7 +8,7 @@ export default function Home() {
     const [content, setContent] = useState('');
 
     const fetchGuestbooks = async () => {
-        const res = await fetch('http://localhost:8080/api/guestbooks');
+        const res = await fetch('http://3.36.75.123:8080/api/guestbooks',{method: 'GET'});
         const data = await res.json();
         setGuestbooks(data);
     };
@@ -16,7 +16,7 @@ export default function Home() {
     const submitGuestbook = async () => {
         if (!nickname || !content) return;
 
-        await fetch('http://localhost:8080/api/guestbooks', {
+        await fetch('http://3.36.75.123:8080/api/guestbooks', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ nickname, content }),

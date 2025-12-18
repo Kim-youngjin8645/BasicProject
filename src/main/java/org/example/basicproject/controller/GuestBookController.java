@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/guestbooks")
-@CrossOrigin(origins = "http://localhost:3000")//3000에서 오는 요청과 연결시키기.
+@CrossOrigin(origins = "*")//어디서든 오는 요청과 연결시키기.
 public class GuestBookController {
 
     private final GuestBookRepository repository;

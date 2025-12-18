@@ -29,7 +29,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build Backend JAR
-        run: ./gradlew build -p src
+        run: ./gradlew build 
 
       - name: Copy Backend JAR to EC2
         uses: appleboy/scp-action@v0.1.3

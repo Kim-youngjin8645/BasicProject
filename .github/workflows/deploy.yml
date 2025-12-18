@@ -11,6 +11,22 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      # Node.js 환경 설정 (프론트엔드 빌드용)
+      #- name: Setup Node.js
+      #  uses: actions/setup-node@v3
+      #  with:
+      #    node-version: 20
+
+      # 프론트엔드 의존성 설치 및 빌드
+      #- name: Install frontend dependencies
+      #  run: |
+      #    cd frontend
+      #    npm install
+      #    npm run build
+
+      # Gradle Wrapper 실행 권한 부여
+      - name: Grant execute permission for Gradle Wrapper
+        run: chmod +x ./src/gradlew
 
       - name: Build Backend JAR
         run: ./gradlew build -p src

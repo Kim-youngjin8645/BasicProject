@@ -12,16 +12,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
+      - name: Build Backend JAR
+        run: ./gradlew build -p src
 
-      - name: Install frontend dependencies #EC2서버 배포준비(로컬에서 빌드)
-        run: |
-          cd frontend
-          npm install
-          npm run build
+      - name: Copy Backend JAR to EC2
+        uses: appleboy/scp-action@v0.1.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user
+          key: ${{ secrets.EC2_KEY }}
+          source: "src/build/libs/BasicProject-0.0.1-SNAPSHOT.jar"
+          target: "/home/ec2-user/app/backend/BasicProject-0.0.1-SNAPSHOT.jar"
 
       - name: Deploy to EC2 #배포
         uses: appleboy/ssh-action@master

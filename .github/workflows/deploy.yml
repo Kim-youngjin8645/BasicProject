@@ -52,10 +52,14 @@ jobs:
             # Backend 배포
             cd /home/ec2-user/app/backend
             pkill -f "BasicProject-0.0.1-SNAPSHOT.jar" || true
+            sleep 2
             
             # 백엔드 실행 (SSH와 완전 분리)
-            exec nohup java -jar BasicProject-0.0.1-SNAPSHOT.jar \
-              > backend.log 2>&1 < /dev/null &
+           nohup java -jar BasicProject-0.0.1-SNAPSHOT.jar \
+            > backend.log 2>&1 < /dev/null &
+            
+            disdown 
+            exit 0
 
             # Frontend 배포
             # cd /home/ec2-user/app/frontend
